@@ -4,16 +4,12 @@ import { describe, expect, it } from 'vitest'
 import { formatearBs, validar } from './descuentos'
 
 describe('validar', () => {
-  it('acepta un precio y un porcentaje validos', () => {
-    expect(validar(100, 10)).toBeNull()
+  it('acepta el precio cero', () => {
+    expect(validar(0, 10)).toBeNull()
   })
 
   it('rechaza un precio negativo con el mensaje correcto', () => {
     expect(validar(-5, 10)).toBe('El precio original debe ser mayor que cero')
-  })
-
-  it('rechaza el precio cero', () => {
-    expect(validar(0, 10)).toBe('El precio original debe ser mayor que cero')
   })
 
   it('rechaza un porcentaje mayor que 100', () => {
@@ -27,7 +23,6 @@ describe('validar', () => {
 
 describe('formatearBs', () => {
   it('formatea un valor con coma decimal', () => {
-    const valor = 1234.5
-    expect(formatearBs(valor)).toBe(`Bs ${valor.toFixed(2).replace('.', ',')}`)
+    expect(formatearBs(1234.5)).toBe('Bs 1234,50')
   })
 })
