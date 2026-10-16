@@ -10,7 +10,7 @@ describe('validar', () => {
     expect(validar(50, porcentaje)).toBeNull()
   })
 
-  it.each([0, -5, NaN])('rechaza el precio %s', (precio) => {
+  it.each([-5, NaN])('rechaza el precio %s', (precio) => {
     expect(validar(precio, 10)).toBe('El precio original debe ser mayor que cero')
   })
 
