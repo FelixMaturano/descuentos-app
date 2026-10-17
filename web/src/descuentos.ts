@@ -1,7 +1,7 @@
 /** Validacion y formato del lado del navegador. Las reglas son las mismas que aplica la API. */
 
 export function validar(precio: number, porcentaje: number): string | null {
-  if (!Number.isFinite(precio) || precio <= 0) {
+  if (!Number.isFinite(precio) || precio < 0) {
     return 'El precio original debe ser mayor que cero'
   }
   if (!Number.isFinite(porcentaje) || porcentaje < 0 || porcentaje > 100) {
