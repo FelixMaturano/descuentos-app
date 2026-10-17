@@ -114,15 +114,19 @@ jobs:
             web/coverage
           if-no-files-found: warn
 
-    mutacion-frontend:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-node@v4
-          with:
-            node-version: 20
-        - run: npm ci --prefix web
-        - run: npx stryker run --prefix web
+  mutacion-frontend:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npx stryker run
 
   # 4. E2E: API y front-end reales dentro del runner, Cypress contra ambos.
   e2e:
